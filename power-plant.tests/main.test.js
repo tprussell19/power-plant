@@ -44,12 +44,12 @@ describe('changeState', () => {
   let plant = {};
 
   test('it should increment a property by one on any object', () => {
-    plant = changeState(plant, "light", 1);
+    plant = changeState("light")(1)(plant);
     expect(plant.light).toEqual(1)
   }),
 
-  test('it should increment a property by any value on any object', () => {
-    plant = changeState(plant, "fertilizer", 50);
+  test('it should change the value of a property of any object', () => {
+    plant = changeState("fertilizer")(50)(plant);
     expect(plant.fertilizer).toEqual(50)
   })
 })

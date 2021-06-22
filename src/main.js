@@ -31,9 +31,11 @@ export const changePlantState = (plant, prop) => {
   }
 }
 
-export const changeState = (state, prop, val) => {
-  return {
-    ...state,
-    [prop]: (state[prop] || 0) + val
+export const changeState = (prop) => {
+  return (val) => {
+    return (state) => ({
+      ...state,
+      [prop] : (state[prop] || 0) + val
+    })
   }
 }
