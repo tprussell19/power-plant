@@ -1,4 +1,5 @@
 import { hydrate } from '../src/main.js';
+import { feed } from '../src/main.js';
 
 describe ('hydrate', () => {
 
@@ -9,4 +10,13 @@ describe ('hydrate', () => {
   });
 
 
+})
+
+describe ('feed', () => {
+
+  test('it should increment soil by one', () => {
+    let plant = {};
+    plant = feed(plant);
+    expect(plant.soil).toEqual(1);
+  });
 })
