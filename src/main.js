@@ -13,12 +13,19 @@ export const hydrate = (plant) => {
 export const feed = (plant) => {
   return {
     ...plant,
-    soil: (plant.soil || 0) +1
+    soil: (plant.soil || 0) + 1
   }
 };
 
 export const giveLight = (plant) => {
   return {
-    ...plant
+    ...plant,
+    light: (plant.light || 0) + 1
   }
 };
+
+export const changePlantState = (plant, prop) => {
+  return {
+    ...plant,
+  }
+}

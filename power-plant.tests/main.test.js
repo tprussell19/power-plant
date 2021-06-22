@@ -1,6 +1,7 @@
 import { hydrate } from '../src/main.js';
 import { feed } from '../src/main.js';
 import { giveLight } from '../src/main.js';
+import { changePlantState } from '../src/main.js';
 
 describe ('hydrate', () => {
 
@@ -26,5 +27,14 @@ describe ('giveLight', () => {
     let plant = {};
     plant = giveLight(plant);
     expect(plant.light).toEqual(1);
+  });
+})
+
+describe('changePlantState', () => {
+  
+  test('it should increment by one the state of any given prop', () => {
+    let plant = {};
+    plant = changePlantState(plant, "soil");
+    expect(plant.soil).toEqual(1)
   });
 })
