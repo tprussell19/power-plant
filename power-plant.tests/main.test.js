@@ -44,7 +44,7 @@ describe('changeState', () => {
   let plant = {};
 
   test('it should increment a property by one on any object', () => {
-    plant = changeState(plant, "light");
+    plant = changeState(plant, "light", 1);
     expect(plant.light).toEqual(1)
   }),
 
