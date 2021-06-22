@@ -27,5 +27,12 @@ export const giveLight = (plant) => {
 export const changePlantState = (plant, prop) => {
   return {
     ...plant,
+    [prop]: (plant[prop] || 0) + 1
+  }
+}
+
+export const changeState = (state, prop) => {
+  return {
+    ...state
   }
 }

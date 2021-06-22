@@ -2,6 +2,7 @@ import { hydrate } from '../src/main.js';
 import { feed } from '../src/main.js';
 import { giveLight } from '../src/main.js';
 import { changePlantState } from '../src/main.js';
+import { changeState } from '../src/main.js';
 
 describe ('hydrate', () => {
 
@@ -36,5 +37,14 @@ describe('changePlantState', () => {
     let plant = {};
     plant = changePlantState(plant, "soil");
     expect(plant.soil).toEqual(1)
+  });
+})
+
+describe('changeState', () => {
+
+  test('it should increment a property by one on any object', () => {
+    let plant = {};
+    plant = changeState(plant, "light");
+    expect(plant.light).toEqual(1)
   });
 })
