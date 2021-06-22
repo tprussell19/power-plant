@@ -3,6 +3,8 @@ import { feed } from '../src/main.js';
 import { giveLight } from '../src/main.js';
 import { changePlantState } from '../src/main.js';
 import { changeState } from '../src/main.js';
+import { storeState } from '../src/main.js';
+import { stateControl } from '../src/main.js';
 
 describe ('hydrate', () => {
 
@@ -51,5 +53,14 @@ describe('changeState', () => {
   test('it should change the value of a property of any object', () => {
     plant = changeState("fertilizer")(50)(plant);
     expect(plant.fertilizer).toEqual(50)
+  })
+})
+
+describe('stateControl', () => {
+
+  test('it increments any object with prop soil by 5', () => {
+    const blueFood = changeState("soil")(5);  // 
+    const fedPlant = stateControl(blueFood);
+    expect(fedPlant.soil).toEqual(5);
   })
 })
