@@ -57,10 +57,14 @@ describe('changeState', () => {
 })
 
 describe('stateControl', () => {
-
+  const blueFood = changeState("soil")(5);
+  const fedPlant = stateControl(blueFood);
+  
   test('it increments any object with prop soil by 5', () => {
-    const blueFood = changeState("soil")(5);  // 
-    const fedPlant = stateControl(blueFood);
     expect(fedPlant.soil).toEqual(5);
+  })
+
+  test('it reads the state', () => {
+    expect(stateControl()).toEqual({soil: 5});
   })
 })

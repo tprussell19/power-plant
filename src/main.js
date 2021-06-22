@@ -42,7 +42,7 @@ export const changeState = (prop) => {
 
 export const storeState = () => {
   let currentState = {};
-  return (changeStateFunction) => {
+  return (changeStateFunction = state => state) => {
     const newState = changeStateFunction(currentState);
     currentState = { ...newState };
     return newState;
