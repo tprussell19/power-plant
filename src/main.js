@@ -2,7 +2,12 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import './js/service-logic.js';
+import { blueFood, stateControl } from '../src/js/service-logic.js';
+
+// instantiate new plants
+const plant1 = stateControl;
+// const plant2 = stateControl;
+// const plant3 = stateControl;
 
 $(document).ready(function() {
   $('#feed').click(function() {

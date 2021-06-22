@@ -31,9 +31,9 @@ export const changeState = (prop) => {
     return (state) => ({
       ...state,
       [prop] : (state[prop] || 0) + val
-    })
-  }
-}
+    });
+  };
+};
 
 export const storeState = () => {
   let currentState = {};
@@ -41,8 +41,8 @@ export const storeState = () => {
     const newState = changeStateFunction(currentState);
     currentState = { ...newState };
     return newState;
-  }
-}
+  };
+};
 
 export const stateControl = storeState();
 
