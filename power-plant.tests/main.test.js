@@ -3,7 +3,6 @@ import { feed } from '../src/js/service-logic.js';
 import { giveLight } from '../src/js/service-logic.js';
 import { changePlantState } from '../src/js/service-logic.js';
 import { changeState } from '../src/js/service-logic.js';
-import { storeState } from '../src/js/service-logic.js';
 import { stateControl } from '../src/js/service-logic.js';
 
 describe ('hydrate', () => {
