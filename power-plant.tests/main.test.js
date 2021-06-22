@@ -1,10 +1,10 @@
-import { hydrate } from '../src/main.js';
-import { feed } from '../src/main.js';
-import { giveLight } from '../src/main.js';
-import { changePlantState } from '../src/main.js';
-import { changeState } from '../src/main.js';
-import { storeState } from '../src/main.js';
-import { stateControl } from '../src/main.js';
+import { hydrate } from '../src/js/service-logic.js';
+import { feed } from '../src/js/service-logic.js';
+import { giveLight } from '../src/js/service-logic.js';
+import { changePlantState } from '../src/js/service-logic.js';
+import { changeState } from '../src/js/service-logic.js';
+import { storeState } from '../src/js/service-logic.js';
+import { stateControl } from '../src/js/service-logic.js';
 
 describe ('hydrate', () => {
 
@@ -58,9 +58,9 @@ describe('changeState', () => {
 
 describe('stateControl', () => {
   const blueFood = changeState("soil")(5);
-  const fedPlant = stateControl(blueFood);
   
   test('it increments any object with prop soil by 5', () => {
+    const fedPlant = stateControl(blueFood);
     expect(fedPlant.soil).toEqual(5);
   })
 
