@@ -33,6 +33,7 @@ export const changePlantState = (plant, prop) => {
 
 export const changeState = (state, prop) => {
   return {
-    ...state
+    ...state,
+    [prop]: (state[prop] || 0) + 1
   }
 }
