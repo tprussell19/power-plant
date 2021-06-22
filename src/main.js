@@ -7,7 +7,7 @@ import './js/service-logic.js';
 $(document).ready(function() {
   $('#feed').click(function() {
     const newState = stateControl(blueFood);
-    $('soil-value').text(`Soil: ${newState.soil}`);
+    $('#soil-value').text(`Soil: ${newState.soil}`);
   });
 
   $('#show-state').click(function() {
