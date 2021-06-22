@@ -16,3 +16,9 @@ export const feed = (plant) => {
     soil: (plant.soil || 0) +1
   }
 };
+
+export const giveLight = (plant) => {
+  return {
+    ...plant
+  }
+};
