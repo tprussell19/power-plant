@@ -41,10 +41,15 @@ describe('changePlantState', () => {
 })
 
 describe('changeState', () => {
+  let plant = {};
 
   test('it should increment a property by one on any object', () => {
-    let plant = {};
     plant = changeState(plant, "light");
     expect(plant.light).toEqual(1)
-  });
+  }),
+
+  test('it should increment a property by any value on any object', () => {
+    plant = changeState(plant, "fertilizer", 50);
+    expect(plant.fertilizer).toEqual(50)
+  })
 })
