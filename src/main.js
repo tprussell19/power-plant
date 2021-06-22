@@ -12,6 +12,7 @@ export const hydrate = (plant) => {
 
 export const feed = (plant) => {
   return {
-    ...plant
+    ...plant,
+    soil: (plant.soil || 0) +1
   }
 };
