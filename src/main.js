@@ -44,9 +44,8 @@ export const storeState = () => {
   let currentState = {};
   return (changeStateFunction) => {
     const newState = changeStateFunction(currentState);
-    // currentState = { ...newState };
-    // return newState;
-    return currentState = { soil: 1 };
+    currentState = { ...newState };
+    return newState;
   }
 }
 
