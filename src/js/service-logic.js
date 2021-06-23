@@ -9,8 +9,8 @@ export const changeState = (prop) => {
   };
 };
 
-export const storeState = () => {
-  let currentState = {};
+export const storeState = (initialState) => {
+  let currentState = initialState;
   return (changeStateFunction = state => state) => {
     const newState = changeStateFunction(currentState);
     currentState = { ...newState };
@@ -19,6 +19,10 @@ export const storeState = () => {
 };
 
 export const stateControl = storeState();
+
+// initial states
+
+export const seedling = { soil: 15, water: 15, light: 15};
 
 // plant input functions
 

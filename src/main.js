@@ -2,7 +2,11 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
-import { fertilizer, starve, hydrate, superHydrate, dehydrate, shade, storeListState, changeListState, storeState, shineLight, feed, sunnyDay } from '../src/js/service-logic.js';
+import { seedling, fertilizer, starve, hydrate, superHydrate, dehydrate, shade, storeListState, changeListState, storeState, shineLight, feed, sunnyDay } from '../src/js/service-logic.js';
+// soilAtrophy, waterAtrophy, lightAtrophy, 
+
+// Helper functions
+
 
 $(document).ready(function() {
   // natural disaster functions
@@ -11,50 +15,53 @@ $(document).ready(function() {
   const listControl = storeListState();
 
   $('#new-plant').click(function() {
-    const stateControl = storeState();
+    const stateControl = storeState(seedling);
     const addPlant = changeListState(stateControl);
     const newList = listControl(addPlant);
     $('#output').append(`
     <div class="container card">
-      <h3 id='soil-value-${newList.length - 1}'>0</h3>
+      <h3 id='soil-value-${newList.length - 1}'>15</h3>
       <div class=btn-group>
         <button id='feed-${newList.length - 1}' class='feed btn btn-success m-2'>Feed</button>
         <button id='fertilize-${newList.length - 1}' class='fertilize btn btn-success m-2'>Fertilize</button>
       </div>
-      <h3 id='hydrate-value-${newList.length - 1}'>0</h3>
+      <h3 id='water-value-${newList.length - 1}'>15</h3>
       <div class='btn-group'>
-        <button id='hydrate-${newList.length - 1}' class='hydrate btn btn-primary m-2'>Hydrate</button>
+        <button id='water-${newList.length - 1}' class='water btn btn-primary m-2'>Hydrate</button>
         <button id='superhydrate-${newList.length - 1}' class='superhydrate btn btn-info m-2'>Superhydrate</button>
       </div>
-      <h3 id='light-value-${newList.length - 1}'>0</h3>
+      <h3 id='light-value-${newList.length - 1}'>15</h3>
       <div class='btn-group'>
         <button id='shine-light-${newList.length - 1}' class='shine-light btn btn-warning m-2'>Shine Light</button>
         <button id='sunny-day-${newList.length - 1}' class='sunny-day btn btn-warning m-2'>Sunny Day</button>
       </div>
     </div>
     `);
-    setInterval(function() {
+
+    // if too much: if any one prop > 90 for more than 8 seconds = death
+    // if too little: if any two props = 0 for more than 8 seconds = death
+
+    const atrophy = setInterval(function() {
       const id = newList.length - 1;
       const stateControl = listControl()[id];
-      const newState = stateControl(starve);
-      $(`#soil-value-${id}`).text(`Soil: ${newState.soil}`);
-      // if conditional handling zero case
-    },
-    2000);
-    setInterval(function() {
-      const id = newList.length - 1;
-      const stateControl = listControl()[id];
-      const newState = stateControl(dehydrate);
-      $(`#hydrate-value-${id}`).text(`Water: ${newState.water}`);
-    },
-    2000);
-    setInterval(function() {
-      const id = newList.length - 1;
-      const stateControl = listControl()[id];
-      const newState = stateControl(shade);
-      $(`#light-value-${id}`).text(`Light: ${newState.light}`);
-    },
-    2000);
+      const starving = stateControl(starve);
+      $(`#soil-value-${id}`).text(`Soil: ${starving.soil}`);
+      const dehydrating = stateControl(dehydrate);
+      $(`#water-value-${id}`).text(`Water: ${dehydrating.water}`);
+      const shading = stateControl(shade);
+      $(`#light-value-${id}`).text(`Light: ${shading.light}`);
+
+      if (starving.soil > 90 || dehydrating.water > 90 || shading.light > 90)
+      {
+        clearInterval(atrophy);
+        alert("A plant has died!");
+      } else if ((starving.soil <= 0 && dehydrating.water <= 0) || (starving.soil <= 0 && shading.light <= 0) || (dehydrating.water <= 0 && shading.light <= 0))
+      {
+        clearInterval(atrophy);
+        alert("A plant has died!");
+      }
+    }, 2000);
+
   });
 
   // feed button event listener
@@ -74,11 +81,11 @@ $(document).ready(function() {
   });
 
   // hydrate button event listener
-  $('body').on('click', '.hydrate', function() {
-    const id = parseInt(this.id.slice(8));
+  $('body').on('click', '.water', function() {
+    const id = parseInt(this.id.slice(6));
     const stateControl = listControl()[id];
     const newState = stateControl(hydrate);
-    $(`#hydrate-value-${id}`).text(`Water: ${newState.water}`);
+    $(`#water-value-${id}`).text(`Water: ${newState.water}`);
   });
 
   // superHydrate button event listener
@@ -86,7 +93,7 @@ $(document).ready(function() {
     const id = parseInt(this.id.slice(13));
     const stateControl = listControl()[id];
     const newState = stateControl(superHydrate);
-    $(`#hydrate-value-${id}`).text(`Water: ${newState.water}`);
+    $(`#water-value-${id}`).text(`Water: ${newState.water}`);
   });
 
   // shineLight button event listener
@@ -124,3 +131,5 @@ $(document).ready(function() {
 // what is death? too much or too little of the things that plants need
 // if too much: if any one prop > 90 for more than 8 seconds = death
 // if too little: if any two props = 0 for more than 8 seconds = death
+// add a victory condition wherein a certain timer lapses and the user "harvests"
+// will need to add a prop = "growth" or something
