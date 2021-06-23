@@ -20,11 +20,25 @@ export const storeState = () => {
 
 export const stateControl = storeState();
 
+// plant input functions
+
 export const feed = changeState("soil")(1);
-export const blueFood = changeState("soil")(5);
+export const fertilizer = changeState("soil")(5);
+export const starve = changeState("soil")(-1);
 
 export const hydrate = changeState("water")(1);
 export const superHydrate = changeState("water")(5);
+export const dehydrate = changeState("water")(-1);
+
+export const shineLight = changeState("light")(1);
+export const sunnyDay = changeState("light")(5);
+export const shade = changeState("light")(-1);
+
+// natural disaster functions
+
+// supernova decrementer (max light, everything else 0)
+// earthquake decrementer (zero soil, everything else normal)
+// flood decrementer (max water, zero soil, normal light)
 
 // List-based functionality
 
