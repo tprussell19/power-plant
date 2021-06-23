@@ -22,14 +22,21 @@ $(document).ready(function() {
       <p id='soil-value-${newList.length -1}'>0</p>
       <button id='feed-${newList.length -1}' class='feed'>Feed</button>
     </div>
-    `)
+    `);
   });
 
-  $('body').on('click', '.feed', () => {
+  $('body').on('click', '.feed', function() {
+    // console.log('.feed').attr(id);
     const id = parseInt(this.id.slice(5));
     const stateControl = listControl()[id];
     const newState = stateControl(blueFood);
     $(`#soil-value-${id}`).text(`Soil: ${newState.soil}`);
   });
 
+  $('.show-state').click(function() {
+    const id = parseInt(this.id.slice(5));
+    const stateControl = listControl()[id];
+    const currentState = stateControl();
+    $(`#soil-value-${id}`).text(`Soil: ${currentState.soil}`);
+  });
 });
