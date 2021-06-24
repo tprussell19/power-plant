@@ -2,6 +2,8 @@ import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
+import './assets/images/death.jpg';
+import './assets/images/dead-plant.jpg';
 import { seedling, fertilizer, starve, hydrate, superHydrate, dehydrate, shade, storeListState, changeListState, storeState, shineLight, feed, sunnyDay } from '../src/js/service-logic.js';
 // soilAtrophy, waterAtrophy, lightAtrophy, 
 
@@ -19,18 +21,18 @@ $(document).ready(function() {
     const addPlant = changeListState(stateControl);
     const newList = listControl(addPlant);
     $('#output').append(`
-    <div class="container card">
-      <h3 id='soil-value-${newList.length - 1}'>15</h3>
+    <div class='container card' id='plant-${newList.length - 1}'>
+      <h3 id='soil-value-${newList.length - 1}'>Soil: 15</h3>
       <div class=btn-group>
         <button id='feed-${newList.length - 1}' class='feed btn btn-success m-2'>Feed</button>
         <button id='fertilize-${newList.length - 1}' class='fertilize btn btn-success m-2'>Fertilize</button>
       </div>
-      <h3 id='water-value-${newList.length - 1}'>15</h3>
+      <h3 id='water-value-${newList.length - 1}'>Water: 15</h3>
       <div class='btn-group'>
         <button id='water-${newList.length - 1}' class='water btn btn-primary m-2'>Hydrate</button>
         <button id='superhydrate-${newList.length - 1}' class='superhydrate btn btn-info m-2'>Superhydrate</button>
       </div>
-      <h3 id='light-value-${newList.length - 1}'>15</h3>
+      <h3 id='light-value-${newList.length - 1}'>Light: 15</h3>
       <div class='btn-group'>
         <button id='shine-light-${newList.length - 1}' class='shine-light btn btn-warning m-2'>Shine Light</button>
         <button id='sunny-day-${newList.length - 1}' class='sunny-day btn btn-warning m-2'>Sunny Day</button>
@@ -54,11 +56,11 @@ $(document).ready(function() {
       if (starving.soil > 90 || dehydrating.water > 90 || shading.light > 90)
       {
         clearInterval(atrophy);
-        alert("A plant has died!");
+        $(`#plant-${newList.length - 1}`).html("<img src='assets/images/dead-plant.jpg' alt='it dead' width='300px' />");
       } else if ((starving.soil <= 0 && dehydrating.water <= 0) || (starving.soil <= 0 && shading.light <= 0) || (dehydrating.water <= 0 && shading.light <= 0))
       {
         clearInterval(atrophy);
-        alert("A plant has died!");
+        $(`#plant-${newList.length - 1}`).html("<img src='assets/images/death.jpg' alt='it dead' width='300px' />");
       }
     }, 2000);
 
