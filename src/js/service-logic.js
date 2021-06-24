@@ -9,6 +9,16 @@ export const changeState = (prop) => {
   };
 };
 
+export const changeTwoStates = (prop, prop2) => {
+  return (val, val2) => {
+    return (state) => ({
+      ...state,
+      [prop]: (state[prop] || 0) + val,
+      [prop2]: (state[prop2] || 0) + val2
+    });
+  };
+};
+
 export const storeState = (initialState) => {
   let currentState = initialState;
   return (changeStateFunction = state => state) => {
@@ -41,8 +51,16 @@ export const shade = changeState("light")(-1);
 // natural disaster functions
 
 // supernova decrementer (max light, everything else 0)
+export const supernova = changeState("light")(60);
+
 // earthquake decrementer (zero soil, everything else normal)
+export const earthquake = changeState("soil")(-30);
+
 // flood decrementer (max water, zero soil, normal light)
+export const deluge = changeTwoStates("soil", "water")(-30, 50);
+
+// growth functions
+
 
 // List-based functionality
 

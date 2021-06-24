@@ -4,15 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import './assets/images/death.jpg';
 import './assets/images/dead-plant.jpg';
-import { seedling, fertilizer, starve, hydrate, superHydrate, dehydrate, shade, storeListState, changeListState, storeState, shineLight, feed, sunnyDay } from '../src/js/service-logic.js';
+import { seedling, fertilizer, starve, hydrate, superHydrate, dehydrate, shade, 
+  storeListState, changeListState, storeState, shineLight, feed, sunnyDay, 
+  supernova, deluge, earthquake } from '../src/js/service-logic.js';
 // soilAtrophy, waterAtrophy, lightAtrophy, 
 
 // Helper functions
 
 
 $(document).ready(function() {
-  // natural disaster functions
-  // setInterval(function() {}, 3000)
   
   const listControl = storeListState();
 
@@ -56,13 +56,41 @@ $(document).ready(function() {
       if (starving.soil > 90 || dehydrating.water > 90 || shading.light > 90)
       {
         clearInterval(atrophy);
-        $(`#plant-${newList.length - 1}`).html("<img src='assets/images/dead-plant.jpg' alt='it dead' width='300px' />");
+        $(`#plant-${newList.length - 1}`).html("Your plant has died :( <img src='assets/images/dead-plant.jpg' alt='it dead' width='300px' />");
       } else if ((starving.soil <= 0 && dehydrating.water <= 0) || (starving.soil <= 0 && shading.light <= 0) || (dehydrating.water <= 0 && shading.light <= 0))
       {
         clearInterval(atrophy);
-        $(`#plant-${newList.length - 1}`).html("<img src='assets/images/death.jpg' alt='it dead' width='300px' />");
+        $(`#plant-${newList.length - 1}`).html("Your plant has died :( <img src='assets/images/death.jpg' alt='it dead' width='300px' />");
       }
     }, 2000);
+
+    // natural disaster functions
+    // DELUGE , EARTHQUAKE , SUPERNOVA
+    
+    // DELUGE every 40,000ms
+    setInterval(function() {
+      const id = newList.length - 1;
+      const stateControl = listControl()[id];
+      const flooding = stateControl(deluge);
+      $(`#soil-value-${id}`).text(`Soil: ${flooding.soil}`);
+      $(`#water-value-${id}`).text(`Water: ${flooding.water}`);
+    }, 40000);
+    
+    // EARTHQUAKE every 50,000ms
+    setInterval(function() {
+      const id = newList.length - 1;
+      const stateControl = listControl()[id];
+      const shaking = stateControl(earthquake);
+      $(`#soil-vlaue-${id}`).text(`Soil: ${shaking.soil}`);
+    }, 50000);
+    
+    // SUPERNOVA every 60,000ms
+    setInterval(function() {
+      const id = newList.length - 1;
+      const stateControl = listControl()[id];
+      const blinding = stateControl(supernova);
+      $(`#light-vlaue-${id}`).text(`Light: ${blinding.light}`);
+    }, 60000);
 
   });
 
@@ -123,15 +151,6 @@ $(document).ready(function() {
 });
 
 
-// add a decrementer to make plants need more food
-// setInterval for decrementing water, soil, and light (decrement by small amounts but very quickly)
-// setInterval for natural disasters like tornados, supernovas, earthquakes (happen once but nearly kill plants)
-// if statement that kills plants upon reaching a certain value
-
-
-// should we have an upper limit?
-// what is death? too much or too little of the things that plants need
-// if too much: if any one prop > 90 for more than 8 seconds = death
-// if too little: if any two props = 0 for more than 8 seconds = death
 // add a victory condition wherein a certain timer lapses and the user "harvests"
+// 
 // will need to add a prop = "growth" or something
