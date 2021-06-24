@@ -32,7 +32,7 @@ export const stateControl = storeState();
 
 // initial states
 
-export const seedling = { soil: 15, water: 15, light: 15};
+export const seedling = { soil: 15, water: 15, light: 15, growth: 0 };
 
 // plant input functions
 
@@ -51,16 +51,16 @@ export const shade = changeState("light")(-1);
 // natural disaster functions
 
 // supernova decrementer (max light, everything else 0)
-export const supernova = changeState("light")(60);
+export const supernova = changeState("light")(30);
 
 // earthquake decrementer (zero soil, everything else normal)
 export const earthquake = changeState("soil")(-30);
 
 // flood decrementer (max water, zero soil, normal light)
-export const deluge = changeTwoStates("soil", "water")(-30, 50);
+export const deluge = changeTwoStates("soil", "water")(-30, 20);
 
 // growth functions
-
+export const growth = changeState("growth")(1);
 
 // List-based functionality
 

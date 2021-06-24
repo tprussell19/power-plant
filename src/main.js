@@ -6,7 +6,7 @@ import './assets/images/death.jpg';
 import './assets/images/dead-plant.jpg';
 import { seedling, fertilizer, starve, hydrate, superHydrate, dehydrate, shade, 
   storeListState, changeListState, storeState, shineLight, feed, sunnyDay, 
-  supernova, deluge, earthquake } from '../src/js/service-logic.js';
+  supernova, deluge, earthquake, growth } from '../src/js/service-logic.js';
 // soilAtrophy, waterAtrophy, lightAtrophy, 
 
 // Helper functions
@@ -37,6 +37,7 @@ $(document).ready(function() {
         <button id='shine-light-${newList.length - 1}' class='shine-light btn btn-warning m-2'>Shine Light</button>
         <button id='sunny-day-${newList.length - 1}' class='sunny-day btn btn-warning m-2'>Sunny Day</button>
       </div>
+      <h3 id='growth-value-${newList.length - 1}'>Plant growth: 0%</h3>
     </div>
     `);
 
@@ -91,6 +92,24 @@ $(document).ready(function() {
       const blinding = stateControl(supernova);
       $(`#light-vlaue-${id}`).text(`Light: ${blinding.light}`);
     }, 60000);
+
+    // Harvest
+    const harvest = setInterval(function() {
+      const id = newList.length - 1;
+      const stateControl = listControl()[id];
+      const growing = stateControl(growth);
+      $(`#growth-value-${id}`).text(`Plant growth: ${growing.growth}%`);
+    
+      if (growing.growth >= 100) {
+        clearInterval(harvest);
+        $(`#plant-${id}`).html("Congrats! Your plant grew enough to harvest! <img src='assets/images/harvest.jpeg' alt='wheat ready for harvest' width='300px'");
+      }
+    
+    }, 3000);
+
+    // read the state of the list, which has all the plants in it
+    // (maybe) write a loop that reads the state of each plant
+    // write a loop that increments or decrements according to whatever is happening
 
   });
 
